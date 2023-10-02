@@ -1,7 +1,7 @@
 <!-- User Id Field -->
 <div class="col-sm-12">
     {!! Form::label('user_id', 'User Id:') !!}
-    <p>{{ $transaction->user_id }}</p>
+    <p><a href="/users/{{ $transaction->user['id'] }}"> {{ $transaction->user['name'] }} || {{ $transaction->user['email'] }} </a> </p>
 </div>
 
 <!-- Qrcode Owner Id Field -->
@@ -13,7 +13,8 @@
 <!-- Qr Code Id Field -->
 <div class="col-sm-12">
     {!! Form::label('qr_code_id', 'Qr Code Id:') !!}
-    <p>{{ $transaction->qr_code_id }}</p>
+    <p><a href="/qrcodes/{{ $transaction->qr_code['id'] }}" > {{ $transaction->qr_code['product_name'] }} </a> </p>
+    <p><img src="{{ asset($transaction->qr_code['image_path']) }}" width="150px" ></p>
 </div>
 
 <!-- Payment Method Field -->

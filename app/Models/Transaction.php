@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
- use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 /**
  * @OA\Schema(
  *      schema="Transaction",
@@ -62,9 +65,10 @@ use Illuminate\Database\Eloquent\Model;
  *          format="date-time"
  *      )
  * )
- */class Transaction extends Model
+ */ class Transaction extends Model
 {
-     use SoftDeletes;    public $table = 'transactions';
+    use SoftDeletes;
+    public $table = 'transactions';
 
     public $fillable = [
         'user_id',
@@ -96,5 +100,14 @@ use Illuminate\Database\Eloquent\Model;
         'deleted_at' => 'nullable'
     ];
 
-    
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    public function qr_code(): BelongsTo
+    {
+        return $this->belongsTo(Qrcode::class);
+    }
 }

@@ -52,3 +52,23 @@
     <p>{{ $qrcode->amount }}</p>
 </div>
 
+<!-- Transactions -->
+
+<div class="col-sm-12">
+    <table>
+        <thead>
+            <tr>
+                <th>Transactions Id</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($qrcode->transactions as $transaction)
+            <tr>
+                <td> <a href="/transactions/{{ $transaction->id }}" >{{ $transaction->id }}</a></td>
+                <td>${{ $transaction->amount }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>

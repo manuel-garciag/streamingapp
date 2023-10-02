@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
- use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @OA\Schema(
  *      schema="Qrcode",
@@ -131,6 +133,12 @@ use Illuminate\Database\Eloquent\Model;
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
+
+
+    public function transactions(): HasMany
+    {
+       return $this->hasMany(Transaction::class, 'qr_code_id');
+    }
 
     
 }

@@ -1,24 +1,34 @@
 <div class="card-body p-0">
     <div class="table-responsive">
-        <table class="table" id="roles-table">
+        <table class="table" id="users-table">
             <thead>
             <tr>
                 <th>Name</th>
+                <th>Email</th>
+                <th>Email Verified At</th>
+                <th>Password</th>
+                <th>Remember Token</th>
+                <th>Rol Id</th>
                 <th colspan="3">Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($roles as $roles)
+            @foreach($users as $user)
                 <tr>
-                    <td>{{ $roles->name }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->email_verified_at }}</td>
+                    <td>{{ $user->password }}</td>
+                    <td>{{ $user->remember_token }}</td>
+                    <td>{{ $user->rol_id }}</td>
                     <td  style="width: 120px">
-                        {!! Form::open(['route' => ['roles.destroy', $roles->id], 'method' => 'delete']) !!}
+                        {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
-                            <a href="{{ route('roles.show', [$roles->id]) }}"
+                            <a href="{{ route('users.show', [$user->id]) }}"
                                class='btn btn-default btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
-                            <a href="{{ route('roles.edit', [$roles->id]) }}"
+                            <a href="{{ route('users.edit', [$user->id]) }}"
                                class='btn btn-default btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
@@ -34,7 +44,7 @@
 
     <div class="card-footer clearfix">
         <div class="float-right">
-            <!--  /* falta el arroba include('adminlte-templates::common.paginate', ['records' => $roles]) */ -->
+            @include('adminlte-templates::common.paginate', ['records' => $users])
         </div>
     </div>
 </div>

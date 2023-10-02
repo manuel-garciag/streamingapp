@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
- use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 /**
  * @OA\Schema(
  *      schema="Roles",
@@ -32,9 +34,10 @@ use Illuminate\Database\Eloquent\Model;
  *          format="date-time"
  *      )
  * )
- */class Roles extends Model
+ */ class Roles extends Model
 {
-     use SoftDeletes;    public $table = 'roles';
+    use SoftDeletes;
+    public $table = 'roles';
 
     public $fillable = [
         'name'
@@ -48,5 +51,11 @@ use Illuminate\Database\Eloquent\Model;
         'name' => 'required'
     ];
 
-    
+    /**
+     * Capture user info
+     */
+    public function user(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
 }

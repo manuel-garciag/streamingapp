@@ -16,9 +16,9 @@
             <tbody>
             @foreach($transactions as $transaction)
                 <tr>
-                    <td>{{ $transaction->user_id }}</td>
+                    <td><a href="/users/{{ $transaction->user['id'] }}"> {{ $transaction->user['name'] }} </a></td>
                     <td>{{ $transaction->qrcode_owner_id }}</td>
-                    <td>{{ $transaction->qr_code_id }}</td>
+                    <td><a href="/qrcodes/{{ $transaction->qr_code['id'] }}" > {{ $transaction->qr_code['product_name'] }} </a></td>
                     <td>{{ $transaction->payment_method }}</td>
                     <td>{{ $transaction->message }}</td>
                     <td>{{ $transaction->amount }}</td>
