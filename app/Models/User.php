@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Hash;
 
 /**
@@ -71,7 +73,7 @@ use Illuminate\Support\Facades\Hash;
  *          format="date-time"
  *      )
  * )
- */class User extends Model  implements Authenticatable
+ */ class User extends Model  implements Authenticatable
 {
     public $table = 'users';
 
@@ -137,5 +139,28 @@ use Illuminate\Support\Facades\Hash;
     {
         $this->attributes['password'] = Hash::make($value);
     }
-    
+
+    /**
+     * Capture transaction for qrcode
+     */
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    /**
+     * Capture transaction for qrcode
+     */
+    public function qr_code(): HasMany
+    {
+        return $this->hasMany(Qrcode::class);
+    }
+
+    /**
+     * Capture info rol
+     */
+    public function rol(): BelongsTo
+    {
+        return $this->belongsTo(Roles::class);
+    }
 }

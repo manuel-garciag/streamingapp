@@ -1,7 +1,7 @@
 <!-- User Id Field -->
 <div class="col-sm-12">
     {!! Form::label('user_id', 'User Id:') !!}
-    <p>{{ $qrcode->user_id }}</p>
+    <p><a class="btn btn-outline-primary" href="/users/{{ $qrcode->user['id'] }}"> {{ $qrcode->user['name'] }}</a></p>
 </div>
 
 <!-- Website Field -->
@@ -31,7 +31,7 @@
 <!-- Image Path Field -->
 <div class="col-sm-12">
     {!! Form::label('image_path', 'Image Path:') !!}
-    <p><img src="{{ asset($qrcode->image_path) }}" width="150px" ></p>
+    <p><img src="{{ asset($qrcode->image_path) }}" width="150px"></p>
 </div>
 
 <!-- Callback Url Field -->
@@ -55,18 +55,24 @@
 <!-- Transactions -->
 
 <div class="col-sm-12">
-    <table>
+    <hr>
+    <h2>Transaciones</h2>
+    <table class="table">
         <thead>
             <tr>
                 <th>Transactions Id</th>
                 <th>Amount</th>
+                <th>Payment Method</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($qrcode->transactions as $transaction)
             <tr>
-                <td> <a href="/transactions/{{ $transaction->id }}" >{{ $transaction->id }}</a></td>
+                <td> <a href="/transactions/{{ $transaction->id }}">{{ $transaction->id }}</a></td>
                 <td>${{ $transaction->amount }}</td>
+                <td>{{ $transaction->payment_method }}</td>
+                <td>{{ $transaction->status }}</td>
             </tr>
             @endforeach
         </tbody>

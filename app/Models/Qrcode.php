@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 /**
  * @OA\Schema(
  *      schema="Qrcode",
@@ -92,9 +93,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          format="date-time"
  *      )
  * )
- */class Qrcode extends Model
+ */ class Qrcode extends Model
 {
-     use SoftDeletes;    public $table = 'qrcodes';
+    use SoftDeletes;
+    public $table = 'qrcodes';
 
     public $fillable = [
         'user_id',
@@ -134,11 +136,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
         'deleted_at' => 'nullable'
     ];
 
-
+    /**
+     * Conection table transaction
+     */
     public function transactions(): HasMany
     {
-       return $this->hasMany(Transaction::class, 'qr_code_id');
+        return $this->hasMany(Transaction::class, 'qr_code_id');
     }
 
-    
+    /**
+     * Conection table user | userId
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

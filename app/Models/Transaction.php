@@ -100,14 +100,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
         'deleted_at' => 'nullable'
     ];
 
+    /**
+     * Conection table user | user_id
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-
+    /**
+     * conection table qrcode | qr_code_id
+     */
     public function qr_code(): BelongsTo
     {
-        return $this->belongsTo(Qrcode::class);
+        return $this->belongsTo(Qrcode::class, 'qr_code_id', 'id');
+    }
+
+    /**
+     * Conection table user | qr code owner id
+     */
+    public function qrcode_owner(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'qrcode_owner_id');
     }
 }

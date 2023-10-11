@@ -1,25 +1,23 @@
 <div class="card-body p-0">
     <div class="table-responsive">
-        <table class="table" id="roles-table">
+        <table class="table table-hover" id="roles-table">
             <thead>
-            <tr>
-                <th>Name</th>
-                <th colspan="3">Action</th>
-            </tr>
+                <tr>
+                    <th>Name</th>
+                    <th colspan="3">Action</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach($roles as $roles)
+                @foreach($roles as $roles)
                 <tr>
-                    <td>{{ $roles->name }}</td>
-                    <td  style="width: 120px">
+                    <td> <a class="btn btn-outline-primary" href="/roles/{{ $roles->id }}">{{ $roles->name }}</a></td>
+                    <td style="width: 120px">
                         {!! Form::open(['route' => ['roles.destroy', $roles->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
-                            <a href="{{ route('roles.show', [$roles->id]) }}"
-                               class='btn btn-default btn-xs'>
+                            <a href="{{ route('roles.show', [$roles->id]) }}" class='btn btn-default btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
-                            <a href="{{ route('roles.edit', [$roles->id]) }}"
-                               class='btn btn-default btn-xs'>
+                            <a href="{{ route('roles.edit', [$roles->id]) }}" class='btn btn-default btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
                             {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
@@ -27,7 +25,7 @@
                         {!! Form::close() !!}
                     </td>
                 </tr>
-            @endforeach
+                @endforeach
             </tbody>
         </table>
     </div>
