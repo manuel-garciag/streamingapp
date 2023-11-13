@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Hash;
 
+use Laravel\Sanctum\HasApiTokens;
 /**
  * @OA\Schema(
  *      schema="User",
@@ -75,6 +76,9 @@ use Illuminate\Support\Facades\Hash;
  * )
  */ class User extends Model  implements Authenticatable
 {
+
+    use HasApiTokens;
+
     public $table = 'users';
 
     public $fillable = [

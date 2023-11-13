@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,15 @@ Route::resource('users', App\Http\Controllers\UserController::class);
 Route::post('pay', [App\Http\Controllers\PaymentController::class, 'pay'])->name('payment');
 Route::get('success', [App\Http\Controllers\PaymentController::class, 'success']);
 Route::get('error', [App\Http\Controllers\PaymentController::class, 'error']);
+
+/**
+ * Generate Token User
+ */
+Route::post('generateToken/{user}', [App\Http\Controllers\TokenController::class, 'generateToken'])->name('generate-token');
+
+/**
+ * Access by Token User
+ */
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
