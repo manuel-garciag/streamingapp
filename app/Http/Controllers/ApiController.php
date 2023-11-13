@@ -30,4 +30,31 @@ class ApiController extends Controller
 
         return response()->json($products);
     }
+
+    /**
+     * Return list transactions of user
+     */
+    public function transactions(Request $request)
+    {
+        $user = $request->user();
+        $transactions = $user->transactions;
+
+        /**
+         * Config by return transaction and amount only
+         */
+        if ($request->has('onlyAmount')) {
+            if ($request->input('onlyAmount') == "true") {
+                $transactions = $transactions->map(function ($transaction) {
+                    return [
+                        'id' => $transaction->id,
+                        'payment_method' => $transaction->payment_method,
+                        'amount' => $transaction->amount,
+                        'created_at' => $transaction->created_at,
+                    ];
+                });
+            }
+        }
+
+        return response()->json($transactions);
+    }
 }
